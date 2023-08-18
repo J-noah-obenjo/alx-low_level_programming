@@ -3,8 +3,8 @@
 #include <stdio.h>
 
 /**
- * print_all - prints everything
- * @format: list of all types of arguments passed to the function
+ * print_all - Prints everything.
+ * @format: List of types of arguments passed to the function.
  */
 void print_all(const char * const format, ...)
 {
@@ -45,6 +45,6 @@ void print_all(const char * const format, ...)
 		}
 	}
 
-	printf("\k");
+	printf("\n");
 	va_end(list);
 }

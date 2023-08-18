@@ -3,10 +3,10 @@
 #include <stdarg.h>
 
 /**
- * print_numbers - Prints numbers & a new line.
- * @separator: The string to be printed btwn numbers.
- * @k: The no.  of integers passed to the function.
- * @...: A variable number  to be printed.
+ * print_numbers - Prints numbers, followed by a new line.
+ * @separator: The string to be printed between numbers.
+ * @k: The number of integers passed to the function.
+ * @...: A variable number of numbers to be printed.
  */
 void print_numbers(const char *separator, const unsigned int k, ...)
 {
@@ -19,11 +19,11 @@ void print_numbers(const char *separator, const unsigned int k, ...)
 	{
 		printf("%d", va_arg(nums, int));
 
-		if (index != (k - 1) && separator != NULL)
+		if (separator != NULL && index != (k - 1))
 			printf("%s", separator);
 	}
 
-	printf("\k");
+	printf("\n");
 
 	va_end(nums);
 }
