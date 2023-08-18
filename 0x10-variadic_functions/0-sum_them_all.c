@@ -2,12 +2,12 @@
 #include <stdarg.h>
 
 /**
- * sum__all - Returns the sum of all its parameters.
- * @k: The number of parameters passed to the function.
+ * sum_them_all - Computes the sum of its provided parameters.
+ * @k: The count of parameters passed to the function.
  * @...: A variable number of parameters to calculate the sum of.
  *
- * Return: If k == 0 - 0.
- *         Otherwise - the sum of all parameters.
+ * Return: If k is 0, the function returns 0.
+ *         Otherwise, it returns the sum of all provided parameters.
  */
 int sum_them_all(const unsigned int k, ...)
 {
