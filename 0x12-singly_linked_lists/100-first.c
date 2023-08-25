@@ -1,14 +1,16 @@
 #include <stdio.h>
 
-void initialize(void) __attribute__ ((constructor));
+void first(void) __attribute__ ((constructor));
 
 /**
- * initialize - displays a sentence before the main
- * function is executed
+ * first - Displays a statement prior to the main execution.
+ * function runs
  */
-void initialize(void)
+void first(void)
 {
-    printf("You're exhausted! and yet, you must permit,\n");
-    printf("I carry my home on my shoulders!\n");
+	printf("You're beat! and yet, you must allow,\n");
+	printf("I bore my house upon my back!\n");
 }
+
+
 

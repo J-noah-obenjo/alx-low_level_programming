@@ -2,8 +2,8 @@
 #include "lists.h"
 
 /**
- * @head: pointer to a list_t listed to be freed
- * free_list - releases a linked list
+ * free_list - deallocates a linked list
+ * @head: list_t list to be released
  */
 void free_list(list_t *head)
 {
@@ -17,9 +17,6 @@ void free_list(list_t *head)
 		head = temp;
 	}
 }
-
-
-
 
 
 
