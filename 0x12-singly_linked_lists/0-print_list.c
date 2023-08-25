@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include "lists.h"
+
+/**
+ * display_list - prints all the elements of a linked list
+ * @h: pointer to the list_t list to be displayed
+ *
+ * Return: the count of displayed nodes
+ */
+size_t display_list(const list_t *h)
+{
+	size_t count = 0;
+
+	while (h)
+	{
+		if (!h->str)
+			printf("[0] (nil)\n");
+		else
+			printf("[%u] %s\n", h->len, h->str);
+		h = h->next;
+		count++;
+	}
+
+	return (count);
+}
+
+
+
