@@ -1,19 +1,14 @@
 section .data
-    format db "Hello, World!", 0
+    hello_format db 'Hello, Holberton', 0
 
 section .text
-    global _start
+    global main
+    extern printf
 
-_start:
-    ; write the string to stdout
-    mov eax, 4
-    mov ebx, 1
-    mov ecx, format
-    mov edx, 13
-    int 0x80
-
-    ; exit the program
-    mov eax, 1
-    xor ebx, ebx
-    int 0x80
+main:
+    mov edi, hello_format
+    xor eax, eax
+    call printf
+    mov eax, 0
+    ret
 
