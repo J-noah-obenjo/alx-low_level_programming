@@ -1,53 +1,53 @@
-#include <stdlib.h>
 #include "main.h"
 #include <stdio.h>
+#include <stdlib.h>
 
-char *create_shield(char *file);
-void close_file(int js);
+char *create_buffer(char *file);
+void close_file(int fd);
 
 /**
- * create_shield - Allocates 1024 bytes for a buffer.
- * @file: The name of the file shield is storing chars for.
+ * create_buffer - Allocates 1024 bytes for a buffer.
+ * @file: The name of the file buffer is storing chars for.
  *
- * Return:  pointer to the newly-allocated shield.
+ * Return: A pointer to the newly-allocated buffer.
  */
-char *create_shield(char *file)
+char *create_buffer(char *file)
 {
-	char *shield;
+	char *buffer;
 
-	shield = malloc(sizeof(char) * 1024);
+	buffer = malloc(sizeof(char) * 1024);
 
-	if (shield == NULL)
+	if (buffer == NULL)
 	{
 		dprintf(STDERR_FILENO,
 			"Error: Can't write to %s\n", file);
 		exit(99);
 	}
 
-	return (shield);
+	return (buffer);
 }
 
 /**
  * close_file - Closes file descriptors.
- * @js: The file descriptor to be closed.
+ * @fd: The file descriptor to be closed.
  */
-void close_file(int js)
+void close_file(int fd)
 {
-	int j;
+	int c;
 
-	j = close(js);
+	c = close(fd);
 
-	if (j == -1)
+	if (c == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close js %d\n", js);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);
 	}
 }
 
 /**
- * main - Copies the contents of a file from one file to another file. 
+ * main - Copies the contents of a file to another file.
+ * @argc: The number of arguments supplied to the program.
  * @argv: An array of pointers to the arguments.
- * @argc: The number/counts of arguments supplied to the program.
  *
  * Return: 0 on success.
  *
@@ -59,7 +59,7 @@ void close_file(int js)
 int main(int argc, char *argv[])
 {
 	int from, to, r, w;
-	char *shield;
+	char *buffer;
 
 	if (argc != 3)
 	{
@@ -67,9 +67,9 @@ int main(int argc, char *argv[])
 		exit(97);
 	}
 
-	shield = create_shield(argv[2]);
+	buffer = create_buffer(argv[2]);
 	from = open(argv[1], O_RDONLY);
-	r = read(from, shield, 1024);
+	r = read(from, buffer, 1024);
 	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
 	do {
@@ -77,25 +77,25 @@ int main(int argc, char *argv[])
 		{
 			dprintf(STDERR_FILENO,
 				"Error: Can't read from file %s\n", argv[1]);
-			free(shield);
+			free(buffer);
 			exit(98);
 		}
 
-		w = write(to, shield, r);
+		w = write(to, buffer, r);
 		if (to == -1 || w == -1)
 		{
 			dprintf(STDERR_FILENO,
 				"Error: Can't write to %s\n", argv[2]);
-			free(shield);
+			free(buffer);
 			exit(99);
 		}
 
-		r = read(from, shield, 1024);
+		r = read(from, buffer, 1024);
 		to = open(argv[2], O_WRONLY | O_APPEND);
 
 	} while (r > 0);
 
-	free(shield);
+	free(buffer);
 	close_file(from);
 	close_file(to);
 
